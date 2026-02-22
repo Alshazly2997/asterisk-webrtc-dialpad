@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>webRTC Dial Pad</title>
+        <script src="sip.min.js"></script>
+        
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                background-color: #f4f4f9;
+            }
+
+	        #login-container {
+		        width: 320px;   
+	        	margin: 80px auto;
+	        	padding: 30px;
+	        	border: 1px solid #ddd;
+	        	border-radius: 8px;
+	        	box-shadow: 0 4px 8px rgba(0,0,0,0.1)
+		
+	        }
+
+            #phone-container {
+                background: #fff;
+                padding: 20px;
+                border-radius: 15px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                width: 250px;
+            }
+		
+	        #login-container h2 { margin-top: 0; }
+
+	        #login-container input {
+	           	width: 90%;
+	            padding: 10px;
+	            margin: 10px 0;
+	            border: 1px solid #ccc;
+	            border-radius: 4px;
+	            box-sizing: border-box;
+	        }
+
+	        #login-container button {
+	            width: 90%;
+	            padding: 10px;
+	            background-color: #28a745;
+	            color: white;
+	            border: none;
+	            border-radius: 4px;
+	            font-size: 16px;
+	            cursor: pointer;
+	            margin-top: 10px;
+	        }
+
+	        #login-container button:hover { background-color: #218838; }
+
+            #display {
+                width: 100%;
+	            height: 50px;
+	            font-size: 28px;
+    	        text-align: center;
+	            margin-bottom: 20px;
+	            border: 1px solid #ccc;
+	            border-radius: 4px;
+	            background-color: #f9f9f9;
+       	        color: #333;
+            }
+
+            .dial-pad {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+
+            button {
+                padding: 15px;
+                font-size: 18px;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                background: #f9f9f9;
+                cursor: pointer;
+            }
+
+            button:hover { background: #e0e0e0; }
+
+            .controls {
+                display: flex;
+                justify-content: space-between;
+                gap: 10px;
+            }
+
+            .btn-call { background: #4CAF50; color: white; border: none; width: 33%; }
+            .btn-call:hover { background: #45a049;}
+
+            .btn-hangup { background: #f44336; color: white; border: none; width: 34%; }
+            .btn-hangup:hover {background: #da190b;}
+
+            .btn-backspace { 
+                padding: 10px;
+                background: #f9f9f9; 
+                color: #333; 
+                border: 1px solid #ccc; 
+                width: 33%;
+
+            }
+            
+            #status {
+                text-align: center;
+                margin-top: 15px;
+                font-size: 14px;
+                color: gray;
+            }
+
+        </style>
+    </head>
+    <body>
+	<div id="login-container">
+		<h2>Login</h2>
+		<input type="text" id="extension" placeholder="Extension">
+		<input type="password" id="password" placeholder="Secret">
+		<button onclick="login()">Login</button>
+	</div>
+
+
+        <div id="phone-container" style="display: none;" >
+            <input type="text" id="display" placeholder="Enter number...">
+
+            <div class="dial-pad">
+                <button onclick="appendNumber('1')">1</button>
+                <button onclick="appendNumber('2')">2</button>
+                <button onclick="appendNumber('3')">3</button>
+                <button onclick="appendNumber('4')">4</button>
+                <button onclick="appendNumber('5')">5</button>
+                <button onclick="appendNumber('6')">6</button>
+                <button onclick="appendNumber('7')">7</button>
+                <button onclick="appendNumber('8')">8</button>
+                <button onclick="appendNumber('9')">9</button>
+                <button onclick="appendNumber('*')">*</button>
+                <button onclick="appendNumber('0')">0</button>
+                <button onclick="appendNumber('#')">#</button>
+            </div>
+
+            <div class="controls">
+                <button class="btn-call" onclick="makeCall()">Call</button>
+                <button class="btn-hangup" onclick="hangupCall()">Hangup</button>
+                <button class="btn-backspace" onclick="backspace()">⌫</button>
+            </div>
+
+            <div id="status">Status: disconnected</div>
+        </div>
+
+        <audio id="remoteAudio" autoplay></audio>
+
+        <script src="app.js"></script>
+    </body>
+</html>
