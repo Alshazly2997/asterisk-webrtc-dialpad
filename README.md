@@ -32,7 +32,7 @@ To run this project, you will need:
 
 4. **deploy**
    
-   Upload index.html, app.js, and sip.min.js to your web server or Asterisk's static-http directory.
+   Upload index.html, app.js, and sip.min.js to your Asterisk's static-http directory.
 
 
 ## Usage
