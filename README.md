@@ -31,6 +31,7 @@ To run this project, you will need:
    const ASTERISK_IP = "192.168.x.x"; // Your Asterisk IP
 
 4. **deploy**
+   
    Upload index.html, app.js, and sip.min.js to your web server or Asterisk's static-http directory.
 
 
